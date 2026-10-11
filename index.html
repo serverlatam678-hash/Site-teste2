@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="description"
+    content="LokiBarber — cortes com atitude, estilo e personalidade."
+  >
+  <title>LokiBarber — Seu estilo, suas regras</title>
+
+  <style>
+    :root {
+      --bg: #100d16;
+      --bg-light: #191322;
+      --purple: #bd91ff;
+      --purple-bright: #d8bdff;
+      --text: #f7f2ff;
+      --muted: #b8adbf;
+      --border: rgba(216, 189, 255, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at 78% 12%, rgba(139, 72, 206, 0.18), transparent 32rem),
+        radial-gradient(ellipse at 8% 45%, rgba(112, 54, 175, 0.12), transparent 30rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: relative;
+      z-index: 1;
+      padding: 24px 0;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 900;
+      letter-spacing: -0.06em;
+    }
+
+    .logo span {
+      color: var(--purple);
+      text-shadow: 0 0 18px rgba(189, 145, 255, 0.6);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--purple-bright);
+    }
+
+    .nav-cta {
+      padding: 10px 17px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--purple-bright);
+    }
+
+    .hero {
+      min-height: 610px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 46px;
+      padding: 56px 0 90px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 20px;
+      color: var(--purple-bright);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 24px;
+      height: 1px;
+      background: var(--purple);
+      content: "";
+      box-shadow: 0 0 12px var(--purple);
+    }
+
+    h1 {
+      max-width: 650px;
+      font-size: clamp(3.4rem, 8vw, 6.7rem);
+      line-height: 0.93;
+      letter-spacing: -0.075em;
+    }
+
+    h1 span {
+      display: block;
+      color: var(--purple);
+      text-shadow: 0 0 30px rgba(189, 145, 255, 0.34);
+    }
+
+    .hero-copy {
+      max-width: 480px;
+      margin: 25px 0 30px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 25px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--purple-bright);
+      box-shadow: 0 0 28px rgba(189, 145, 255, 0.28);
+      color: #1a1025;
+      font-weight: 900;
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 38px rgba(189, 145, 255, 0.5);
+    }
+
+    .play-icon {
+      font-size: 0.85rem;
+    }
+
+    .hero-art {
+      position: relative;
+      min-height: 390px;
+      display: grid;
+      place-items: center;
+    }
+
+    .glow-ring {
+      position: absolute;
+      width: min(380px, 85vw);
+      aspect-ratio: 1;
+      border: 1px solid rgba(216, 189, 255, 0.5);
+      border-radius: 50%;
+      box-shadow:
+        0 0 35px rgba(172, 112, 255, 0.18),
+        inset 0 0 35px rgba(172, 112, 255, 0.1);
+    }
+
+    .glow-ring::before,
+    .glow-ring::after {
+      position: absolute;
+      border: 1px solid rgba(216, 189, 255, 0.16);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .glow-ring::before {
+      inset: 19px;
+    }
+
+    .glow-ring::after {
+      inset: 40px;
+    }
+
+    .hero-card {
+      position: relative;
+      width: min(300px, 75vw);
+      aspect-ratio: 0.78;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 180px 180px 28px 28px;
+      background:
+        linear-gradient(180deg, transparent 25%, rgba(12, 8, 18, 0.95) 100%),
+        radial-gradient(ellipse at 50% 28%, #7a4ea2 0%, #30213e 35%, #17121c 72%);
+      box-shadow: 0 0 70px rgba(145, 85, 204, 0.22);
+    }
+
+    .hero-card::before {
+      position: absolute;
+      top: 15%;
+      left: 50%;
+      width: 150px;
+      height: 150px;
+      border: 1px solid rgba(234, 214, 255, 0.42);
+      border-radius: 50%;
+      content: "";
+      transform: translateX(-50%);
+      box-shadow: 0 0 30px rgba(189, 145, 255, 0.18);
+    }
+
+    .hero-card::after {
+      position: absolute;
+      top: 31%;
+      left: 50%;
+      width: 90px;
+      height: 120px;
+      border-radius: 46% 46% 38% 38%;
+      background: linear-gradient(135deg, #c8a5e9, #5e3c79);
+      content: "";
+      opacity: 0.72;
+      transform: translateX(-50%);
+      filter: blur(1px);
+    }
+
+    .card-label {
+      position: relative;
+      z-index: 1;
+      color: var(--purple-bright);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .card-title {
+      position: relative;
+      z-index: 1;
+      margin-top: 5px;
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: -0.05em;
+    }
+
+    section {
+      padding: 88px 0;
+    }
+
+    .section-heading {
+      max-width: 620px;
+      margin-bottom: 38px;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 12px;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+
+    .section-heading p,
+    .about-copy p {
+      color: var(--muted);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      align-items: center;
+      gap: 65px;
+    }
+
+    .about-mark {
+      min-height: 270px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: linear-gradient(145deg, rgba(189, 145, 255, 0.13), rgba(255, 255, 255, 0.02));
+      color: var(--purple);
+      font-size: 5rem;
+      text-shadow: 0 0 30px rgba(189, 145, 255, 0.55);
+    }
+
+    .about-copy h2 {
+      margin-bottom: 18px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.05;
+      letter-spacing: -0.06em;
+    }
+
+    .about-copy p + p {
+      margin-top: 14px;
+    }
+
+    .services {
+      background: linear-gradient(180deg, transparent, rgba(189, 145, 255, 0.045), transparent);
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .service-card {
+      min-height: 220px;
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.025);
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(216, 189, 255, 0.55);
+      background: rgba(189, 145, 255, 0.07);
+    }
+
+    .service-number {
+      color: var(--purple);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+    }
+
+    .service-card h3 {
+      margin: 23px 0 9px;
+      font-size: 1.3rem;
+      letter-spacing: -0.03em;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .booking {
+      padding-top: 36px;
+    }
+
+    .booking-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+      padding: 42px;
+      border: 1px solid rgba(216, 189, 255, 0.28);
+      border-radius: 26px;
+      background:
+        radial-gradient(ellipse at 90% 0%, rgba(189, 145, 255, 0.2), transparent 48%),
+        var(--bg-light);
+    }
+
+    .booking-box h2 {
+      margin-bottom: 8px;
+      font-size: clamp(1.8rem, 4vw, 2.7rem);
+      line-height: 1.05;
+      letter-spacing: -0.06em;
+    }
+
+    .booking-box p {
+      color: var(--muted);
+    }
+
+    footer {
+      padding: 28px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    @media (max-width: 760px) {
+      .nav-links {
+        gap: 14px;
+      }
+
+      .nav-links a:not(.nav-cta) {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        padding: 55px 0 60px;
+      }
+
+      .hero-art {
+        min-height: 350px;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .about-mark {
+        min-height: 190px;
+      }
+
+      .service-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .booking-box {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 30px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      section {
+        padding: 65px 0;
+      }
+
+      .footer-content {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <nav class="container nav" aria-label="Navegação principal">
+      <a class="logo" href="#inicio">Loki<span>Barber</span></a>
+
+      <div class="nav-links">
+        <a href="#sobre">Sobre nós</a>
+        <a href="#servicos">Serviços</a>
+        <a class="nav-cta" href="#agendar">Agendar</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="container hero" id="inicio">
+      <div>
+        <p class="eyebrow">Barbearia • Estilo • Atitude</p>
+        <h1>Seu estilo.<span>Suas regras.</span></h1>
+        <p class="hero-copy">
+          Um bom corte muda o visual. O corte certo muda a forma como você
+          chega. Na LokiBarber, cada detalhe conta.
+        </p>
+        <a class="button" href="#agendar">
+          <span class="play-icon" aria-hidden="true">▶</span>
+          Play!
+        </a>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="glow-ring"></div>
+        <div class="hero-card">
+          <span class="card-label">LokiBarber</span>
+          <span class="card-title">Corte com presença.</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre">
+      <div class="container about-grid">
+        <div class="about-mark" aria-hidden="true">✂</div>
+
+        <div class="about-copy">
+          <p class="eyebrow">Sobre nós</p>
+          <h2>Mais do que um corte. Uma experiência.</h2>
+          <p>
+            A LokiBarber nasceu para quem sabe que estilo também é atitude.
+            Criamos um espaço descontraído, com profissionais atentos ao que
+            combina com você.
+          </p>
+          <p>
+            Do clássico ao moderno, cuidamos de cada detalhe para você sair
+            daqui com um visual que tem a sua cara.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="servicos">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Nossos serviços</p>
+          <h2>Seu próximo visual começa aqui.</h2>
+          <p>Escolha o serviço e deixe o resto com a gente.</p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card">
+            <span class="service-number">01 / CORTE</span>
+            <h3>Corte masculino</h3>
+            <p>Do degradê ao clássico, com acabamento pensado para o seu estilo.</p>
+          </article>
+
+          <article class="service-card">
+            <span class="service-number">02 / BARBA</span>
+            <h3>Barba e contorno</h3>
+            <p>Alinhamento, desenho e cuidado para uma barba bem definida.</p>
+          </article>
+
+          <article class="service-card">
+            <span class="service-number">03 / COMBO</span>
+            <h3>Corte + barba</h3>
+            <p>Uma renovação completa para você sair no melhor estilo.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="container booking" id="agendar">
+      <div class="booking-box">
+        <div>
+          <p class="eyebrow">Bora marcar?</p>
+          <h2>Pronto para dar o próximo passo?</h2>
+          <p>Chame a LokiBarber e agende seu horário.</p>
+        </div>
+
+        <!-- Troque 55SEUNUMERO pelo número da barbearia, com código do país e DDD. -->
+        <a
+          class="button"
+          href="https://wa.me/55SEUNUMERO"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Agendar pelo WhatsApp
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <a class="logo" href="#inicio">Loki<span>Barber</span></a>
+      <p>© 2025 LokiBarber. Seu estilo, suas regras.</p>
+    </div>
+  </footer>
+</body>
+</html>
